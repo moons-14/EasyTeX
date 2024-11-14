@@ -1,0 +1,11 @@
+{
+  "name": "easytex",
+  "version": "0.0.1",
+  "description": "Construct mathematical expressions by hand or GUI editor and convert them to LaTeX with the help of AI.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
