@@ -1,11 +1,13 @@
+"use client";
+import { Draw } from "@/components/draw";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function Home() {
 	return (
 		<>
 			<div className="flex">
-				<div className="flex-1 bg-red-200 h-[calc(100dvh-3rem)] border-r border-border">
-					Paint and GUI Editor
+				<div className="flex-1 h-[calc(100dvh-3rem)] border-r border-border">
+					<Draw />
 				</div>
 				<div className="flex-1">
 					<ScrollArea className="h-[calc(100dvh-3rem)] w-full">
