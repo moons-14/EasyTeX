@@ -23,6 +23,7 @@ export const LaTeXChat = () => {
 	);
 	const llmModel = useLaTeXStore((state) => state.llmModel);
 	const changeLLMModel = useLaTeXStore((state) => state.changeLLMModel);
+	const llmLoading = useLaTeXStore((state) => state.llmLoading);
 
 	return (
 		<div className="p-4">
@@ -30,20 +31,25 @@ export const LaTeXChat = () => {
 				Generate or Fix LaTeX by Chat
 			</div>
 			<div className="flex justify-between items-center gap-4 pb-4">
-				<Button className="flex-1" onClick={generateLaTeXFromDrawing}>
+				<Button
+					className="flex-1"
+					onClick={generateLaTeXFromDrawing}
+					disabled={llmLoading}
+				>
 					Generate LaTeX from drawing
 				</Button>
 				<Button
 					className="flex-1"
 					variant="outline"
 					disabled={!chatInput}
-					onClick={generateLaTeXFromChat}
+					onClick={generateLaTeXFromChat || llmLoading}
 				>
 					Generate LaTeX from Chat
 				</Button>
 				<Select
 					onValueChange={(value) => changeLLMModel(value as LLMModel)}
 					value={llmModel}
+                    disabled={llmLoading}
 				>
 					<SelectTrigger className="flex-1">
 						<SelectValue placeholder="AI Model" />
@@ -66,6 +72,11 @@ export const LaTeXChat = () => {
 				}}
 			/>
 			<div className="mt-4 space-y-4">
+                {
+                    llmLoading && (
+                        <div className="text-center text-sm text-slate-500">Generating...</div>
+                    )
+                }
 				{chatMessages.map((msg, i) => (
 					<div
 						key={`${

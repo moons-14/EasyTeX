@@ -1,11 +1,9 @@
 import { useLaTeXStore } from "@/store/LaTeXStore";
 import Latex from "react-latex-next";
-import { Button } from "../ui/button";
 import "katex/dist/katex.min.css";
 
 export const LaTeXRender = () => {
 	const latex = useLaTeXStore((state) => state.latex);
-	const generateLaTeXFromDrawing = useLaTeXStore((state) => state.generateLaTeXFromDrawing);
 
 	return (
 		<>
