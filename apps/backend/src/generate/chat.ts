@@ -3,13 +3,11 @@ import { createOpenAI } from "@ai-sdk/openai";
 import { generateText } from "ai";
 import { llmModels } from "../utils/llmModel";
 
-export const generateDraw = async (
-	draw: string,
+export const generateChat = async (
+	chat: string,
+	currentLatex: string,
 	model: keyof typeof llmModels,
-	apiKey: {
-		openai: string;
-		gemini: string;
-	},
+	apiKey: { openai: string; gemini: string },
 ) => {
 	const modelDetail = llmModels[model];
 
@@ -29,20 +27,11 @@ export const generateDraw = async (
 				{
 					role: "system",
 					content:
-						"Output the formula contained in the given image as a latex. If several formulas are included, output them in list format. The output must not contain any content other than LaTeX. Output as display formulas. Be sure to output the leading and trailing $$ as well.",
+						"You are an assistant who edits LaTeX based on the user's instructions. You write accurate LaTeX based on the current LaTeX code and the user's instructions. If multiple formulae are included, output them in list format. Do not include any non-LaTeX content in the output. Output as display formulas. Be sure to output the leading and trailing $$ as well.",
 				},
 				{
 					role: "user",
-					content: [
-						{
-							type: "image",
-							image: `data:image/png;base64,${draw.replace(/^data:image\/\w+;base64,/, "")}`,
-						},
-						{
-							type: "text",
-							text: "LaTeX the formulae contained in this image.",
-						},
-					],
+					content: `## Current LaTeX\n${currentLatex}\n\n## User Instruction\n${chat}`,
 				},
 			],
 		});
@@ -62,21 +51,11 @@ export const generateDraw = async (
 				{
 					role: "system",
 					content:
-						"Output the formula contained in the given image as a latex. If several formulas are included, output them in list format. The output must not contain any content other than LaTeX. Output as display formulas. Be sure to output the leading and trailing $$ as well.",
+						"You are an assistant who edits LaTeX based on the user's instructions. You write accurate LaTeX based on the current LaTeX code and the user's instructions. If multiple formulae are included, output them in list format. Do not include any non-LaTeX content in the output. Output as display formulas. Be sure to output the leading and trailing $$ as well.",
 				},
 				{
 					role: "user",
-					content: [
-						{
-							type: "file",
-							data: draw,
-							mimeType: "image/png",
-						},
-						{
-							type: "text",
-							text: "LaTeX the formulae contained in this image.",
-						},
-					],
+					content: `## Current LaTeX\n${currentLatex}\n\n## User Instruction\n${chat}`,
 				},
 			],
 		});

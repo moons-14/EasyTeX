@@ -1,3 +1,4 @@
+import { generateLaTeXFromChat } from "@/generate/chat";
 import { generateLaTeXFromDrawing } from "@/generate/draw";
 import { create } from "zustand";
 
@@ -54,7 +55,7 @@ export const useLaTeXStore = create<{
 	chatInput: "",
 	setChatInput: (input: string) => set({ chatInput: input }),
 	generateLaTeXFromDrawing: generateLaTeXFromDrawing,
-	generateLaTeXFromChat: () => {},
+	generateLaTeXFromChat: generateLaTeXFromChat,
 	llmModel: "gpt-4o-mini",
 	changeLLMModel: (model) => set({ llmModel: model }),
 	exportPNG: null,
