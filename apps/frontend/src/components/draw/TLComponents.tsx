@@ -1,4 +1,3 @@
-import { ChevronUp } from "lucide-react";
 import {
 	DefaultToolbar,
 	type TLComponents,
@@ -18,6 +17,7 @@ function CustomToolbar() {
 	const isSelectToolSelected = useIsToolSelected(tools.select);
 	const isHandToolSelected = useIsToolSelected(tools.hand);
 	const isDrawToolSelected = useIsToolSelected(tools.draw);
+	const isTextToolSelected = useIsToolSelected(tools.text);
 	const isEraserToolSelected = useIsToolSelected(tools.eraser);
 
 	return (
@@ -26,6 +26,7 @@ function CustomToolbar() {
 				<TldrawUiMenuItem {...tools.select} isSelected={isSelectToolSelected} />
 				<TldrawUiMenuItem {...tools.hand} isSelected={isHandToolSelected} />
 				<TldrawUiMenuItem {...tools.draw} isSelected={isDrawToolSelected} />
+				<TldrawUiMenuItem {...tools.text} isSelected={isTextToolSelected} />
 				<TldrawUiMenuItem {...tools.eraser} isSelected={isEraserToolSelected} />
 				
 				{/* <div className="border-l border h-6" />

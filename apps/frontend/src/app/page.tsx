@@ -1,5 +1,8 @@
 "use client";
 import { Draw } from "@/components/draw";
+import { LaTeXChat } from "@/components/latex/chat";
+import { LaTeXEditor } from "@/components/latex/editor";
+import { LaTeXRender } from "@/components/latex/render";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function Home() {
@@ -11,9 +14,15 @@ export default function Home() {
 				</div>
 				<div className="flex-1">
 					<ScrollArea className="h-[calc(100dvh-3rem)] w-full">
-						<div className="h-40 border-b border-border bg-green-200">LaTeX Preview Render</div>
-						<div className="h-40 border-b border-border bg-blue-200">LaTex Code Editor</div>
-						<div className="h-40 bg-orange-200">Chat UI with AI</div>
+						<div className="min-h-40 border-b border-border">
+							<LaTeXRender />
+						</div>
+						<div className="min-h-40 border-b border-border">
+							<LaTeXEditor />
+						</div>
+						<div className="h-40">
+              <LaTeXChat />
+            </div>
 					</ScrollArea>
 				</div>
 			</div>
