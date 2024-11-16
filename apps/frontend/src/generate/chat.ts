@@ -3,6 +3,7 @@ import { useLaTeXStore } from "../store/LaTeXStore";
 export const generateLaTeXFromChat = async () => {
 	const latex = useLaTeXStore.getState().latex;
 	const chatInput = useLaTeXStore.getState().chatInput;
+    const setChatInput = useLaTeXStore.getState().setChatInput;
 	const addChatMessage = useLaTeXStore.getState().addChatMessage;
 	const setLLMLoading = useLaTeXStore.getState().setLLMLoading;
 	const llmModel = useLaTeXStore.getState().llmModel;
@@ -35,6 +36,7 @@ export const generateLaTeXFromChat = async () => {
 			if (response.ok && data.success) {
 				setLaTeX(data.result);
 				addChatMessage(data.result, "bot", "chat", false);
+                setChatInput("");
 			} else {
 				addChatMessage(
 					data.error ||
@@ -45,6 +47,7 @@ export const generateLaTeXFromChat = async () => {
 				);
 			}
 
+            
 			setLLMLoading(false);
 
 			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
